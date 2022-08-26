@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel {
+            width: 600px;
+            height: 800px;
+            border-radius: 16px;
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .carousel .container {
+            height: 100%;
+            width: 100%;
+
+            position: relative;
+            left: 0;
+
+            display: flex;
+            transition: all 1s;
+        }
+
+        .carousel .container img {
+            width: 100%;
+            height: 100%;
+
+            flex-shrink: 0;
+
+            object-fit: cover;
+        }
+
+        .carousel .shift .btn {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+
+            background-color: gray;
+            color: white;
+
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+
+            font-size: 40px;
+            font-weight: bold;
+
+            line-height: 50px;
+            text-align: center;
+
+            user-select: none;
+        }
+
+        .carousel .shift .left {
+            left: 20px;
+        }
+
+        .carousel .shift .right {
+            right: 20px;
+        }
+
+        .carousel .bottom {
+            position: absolute;
+            bottom: 20px;
+
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: max-content;
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel .bottom .indicator {
+            height: 10px;
+            width: 40px;
+
+            background-color: grey;
+
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <div class="container">
+            <img src="images/batPage1.jpg">
+            <img src="images/batPage2.jpg">
+            <img src="images/batPage3.jpg">
+        </div>
+    </div>
+    <div class="shift">
+        <div class="btn left" onclick="leftShift()">&lt;</div>
+        <div class="btn right" onclick="rightShift()">&gt;</div>
+    </div>
+    <div class="bottom">
+        <div class="indicator" onclick="setindex(0)"></div>
+        <div class="indicator" onclick="setindex(1)"></div>
+        <div class="indicator" onclick="setindex(2)"></div>
+    </div>
+
+    <script>
+        let index = 0;
+
+        let imageCount = document.querySelectorAll(".carousel .container img").length;
+
+        const bottom = document.querySelector(".carousel .bottom");
+
+        for (let i = 0; i < imageCount; i++) {
+            const indicator = document.createElement("div")
+            indicator.classList.add("indicator")
+            indicator.onclick = setindex(i)
+
+            bottom.append(indicator)
+        }
+
+        function refresh() {
+            if (index < 0) {
+                index = imageCount - 1
+            } else if (index >= imageCount) {
+                index = 0
+            }
+            let carousel = document.querySelector('.carousel')
+            let width = getComputedStyle(carousel).width
+            width = Number(width.slice(0, -2))
+            carousel.querySelector(".container").style.left = index * width * -1 + "px"
+        }
+        function leftShift() {
+            index--
+            refresh()
+        }
+        function rightShift() {
+            index++
+            refresh()
+        }
+        function setindex(idx) {
+            index = idx
+            refresh()
+        }
+
+
+
+        refresh();
+    </script>
+
+
+
+</body>
+
+</html>

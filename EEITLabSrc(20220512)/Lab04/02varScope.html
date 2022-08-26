@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02varScope.html</title>
+</head>
+
+<body>
+    <script>
+        //case 1
+        // //廣域(全域)變數
+        // var a = 100;  //global variable
+
+        // //函數宣告定義
+        // function f() {
+        //     var a = 10;  //local variable
+        //     console.log(`function in a=${a}`);
+        //     console.log(`window.a=${window.a}`);
+        //     console.log(`this.a=${this.a}`);
+        // }
+
+        // //呼叫函數
+        // console.log(`before call function out a=${a}`);
+        // f();
+        // console.log(`After call function out a=${a}`);
+
+        //case 2
+        // //廣域(全域)變數
+        // var a = 100;  //global variable
+
+        // //函數宣告定義
+        // function f() {
+        //     a = 10;  //global variable
+        //     console.log(`function in a=${a}`);
+        //     // console.log(`window.a=${window.a}`);
+        //     // console.log(`this.a=${this.a}`);
+        //     // console.log(this);  //window
+        // }
+
+        // //呼叫函數
+        // console.log(`before call function out a=${a}`);
+        // f();
+        // console.log(`After call function out a=${a}`);
+
+        //case 3
+        //廣域(全域)變數
+        var a = 100;  //global variable
+
+        //函數宣告定義
+        function f() {
+            var a = 10;  //global variable
+            console.log(`function in a=${a}`);
+            for (let a = 1; a <= 3; a++) {
+                console.log(`block a=${a}`);
+            }
+            console.log(`function in a=${a}`);
+        }
+
+        //呼叫函數
+        console.log(`before call function out a=${a}`);
+        f();
+        console.log(`After call function out a=${a}`);
+    </script>
+</body>
+
+</html>

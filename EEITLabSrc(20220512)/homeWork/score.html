@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .black {
+            filter: grayscale(1);
+        }
+
+        .color {
+            filter: grayscale(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bats">
+
+        <div class="title" font-size="200px">
+            <h2>評分為:</h2><h3 id="bathtml"></h3>
+            <!-- <span id="bathtml" size="500px"></span><br> -->
+
+        </div><br>
+
+
+        <script>
+
+            function mouseover(e) {
+                // e.target.className = "color";
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`bat${i}`).className = "color";
+                    console.log("try1");
+                    if ((`bat${i}`) == e.target.id) {
+                        // document.getElementById(`bathtml`).innerHTML = i;
+                        // console.log(i);
+                        if (i == 1) {
+                            document.getElementById(`bathtml`).innerHTML = "Soso";
+                        } else if (i == 2) {
+                            document.getElementById(`bathtml`).innerHTML = "Fine";
+                        } else if (i == 3) {
+                            document.getElementById(`bathtml`).innerHTML = "Good";
+                        } else if (i == 4) {
+                            document.getElementById(`bathtml`).innerHTML = "Great";
+                        } else if (i == 5) {
+                            document.getElementById(`bathtml`).innerHTML = "Outstanding";
+                        }
+                        break;
+
+                    }
+                }
+            }
+
+            function mouseout(e) {
+                // e.target.className = "black";
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`bat${i}`).className = "black";
+                }
+            }
+
+            function click(e) {
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`bat${i}`).removeEventListener("mouseover", mouseover);
+                    document.getElementById(`bat${i}`).removeEventListener("mouseout", mouseout);
+                }
+            }
+
+            function dblclick(e) {
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`bat${i}`).className = "black";
+                    document.getElementById(`bat${i}`).addEventListener("mouseover", mouseover);
+                    document.getElementById(`bat${i}`).addEventListener("mouseout", mouseout);
+                }
+            }
+
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById("bats").innerHTML += `<img src='images/bat.png' class='black' id='bat${i}' width='150px'>`;
+            }
+
+            for (let j = 1; j <= 5; j++) {
+                document.getElementById(`bat${j}`).addEventListener("mouseover", mouseover);
+                document.getElementById(`bat${j}`).addEventListener("mouseout", mouseout);
+                document.getElementById(`bat${j}`).addEventListener("click", click);
+                document.getElementById(`bat${j}`).addEventListener("dblclick", dblclick);
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>
